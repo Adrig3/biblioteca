@@ -27,14 +27,16 @@ def consultar_disponibilidad(a):
      for i in libros:
         if libros[i]["titulo"] == a and libros[i]["disp"] == True:
             print("\nEl libro está disponible.\n")
+            input("Presione enter para continuar...")
         elif libros[i]["titulo"] == a and libros[i]["disp"] == False:
             print("\nEl libro no está disponible.\n")
+            input("Presione enter para continuar...")
         else:
              check = check + 1
 
         if check == len(libros):
              print("\nLibro no encontrado, ¿lo has escrito correctamente?\n")
-
+             consultar_disponibilidad(input("¿Qué libro desea consultar?: "))
 
 '''
 Se declara la función reserva y se inicia un contador llamdo check, 
@@ -52,18 +54,21 @@ def reserva(a):
             if libros[i]["disp"]  == True:
                  libros[i]["disp"] = False
                  print(f"\nSe ha reservado el libro {libros[i]["titulo"]}\n")
+                 input("Presione enter para continuar...")
             else:
                  print(f"\nEl libro {libros[i]["titulo"]} ya está reservado.\n")
+                 input("Presione enter para continuar...")
          else:
               check = check + 1
          if check == len(libros):
               print("\nLibro no encontrado, ¿lo has escrito correctamente?\n")
-         
+              reserva(input("¿Qué libro desea reservar?: "))
 
 
 # Muestra un mensaje de ayuda
 def help():
      print("\nVER - MUESTRA EL CATÁLOGO DE LIBROS\nCONSULTAR - CONSULTA LA DISPONIBILIDAD DE UN LIBRO\nRESERVA - RESERVA UN LIBRO SI ESTE ESTÁ DISPONIBLE\nSALIR - CIERRA EL PROGRAMA\nAYUDA - MUESTRA ESTE MENSAJE")
+     print("Presione enter para continuar")
 
 
 # La función muestra un menú con todas las opciones posibles y ejecuta la función asignada a la opción elegida.
