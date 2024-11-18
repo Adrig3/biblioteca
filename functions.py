@@ -11,7 +11,7 @@ el listado de libros mostrando por pantalla su título y su autor
 def ver_catalogo():
     for i in libros:
          print("")
-         print(f"{libros[i]["autor"]} | {libros[i]["titulo"]}")
+         print(f"{libros[i]['autor']} | {libros[i]['titulo']}")
          print("")
 
 '''
@@ -25,12 +25,13 @@ diccionario y si es así le indica al usuario que ha escrito mal el título o qu
 '''
 def consultar_disponibilidad(a):
      check = 0
+     a = a.strip().lower()
      for i in libros:
-        if libros[i]["titulo"] == a and libros[i]["disp"] == True:
+        if libros[i]["titulo"].lower() == a and libros[i]["disp"] == True:
             print("\nEl libro está disponible.\n")
             input("Presione enter para continuar...")
             os.system("cls")
-        elif libros[i]["titulo"] == a and libros[i]["disp"] == False:
+        elif libros[i]["titulo"].lower() == a and libros[i]["disp"] == False:
             print("\nEl libro no está disponible.\n")
             input("Presione enter para continuar...")
             os.system("cls")
@@ -52,15 +53,16 @@ saber al usuario que no se ha encontrado el libro.
 '''
 def reserva(a):
     check = 0
+    a = a.strip().lower()
     for i in libros:
-         if libros[i]["titulo"] == a:
+         if libros[i]["titulo"].lower() == a:
             if libros[i]["disp"]  == True:
                  libros[i]["disp"] = False
-                 print(f"\nSe ha reservado el libro {libros[i]["titulo"]}\n")
+                 print(f"\nSe ha reservado el libro {libros[i]['titulo']}\n")
                  input("Presione enter para continuar...")
                  os.system("cls")
             else:
-                 print(f"\nEl libro {libros[i]["titulo"]} ya está reservado.\n")
+                 print(f"\nEl libro {libros[i]['titulo']} ya está reservado.\n")
                  input("Presione enter para continuar...")
                  os.system("cls")
          else:
@@ -89,18 +91,17 @@ def menu():
             print("(S) Salir de la aplicación                                |")
             print("(H) Muestra ayuda sobre el programa                       |")
             print("===========================================================")
-            user_input = input("Seleccione una opción: ")
+            user_input = input("Seleccione una opción: ").strip().lower()
 
             match user_input:
-                case "V" | "v":
+                case "v":
                       ver_catalogo() 
-                case "C" | "c":
+                case "c":
                       consultar_disponibilidad(input("¿Qué libro desea consultar?: "))
-                case "R" | "r":
+                case "r":
                       reserva(input("¿Qué libro desea reservar?: "))
-                case "H" | "h":
+                case "h":
                       help()
-                case "S" | "s":
+                case "s":
                       salir = True
                 case _: print("\nOpción no válida\n")
-
